@@ -18,7 +18,7 @@ public class Exam01Controller {
 	private static final Logger logger
 					= LoggerFactory.getLogger(Exam01Controller.class);
 
-	@RequestMapping("/")
+	@RequestMapping("/home")
 	public String home() {
 		logger.error("error 메시지");
 		logger.warn("warn 메시지");
