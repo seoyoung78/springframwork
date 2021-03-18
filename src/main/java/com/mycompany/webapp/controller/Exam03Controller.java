@@ -5,6 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.mycompany.webapp.dto.User;
 
 @Controller
 @RequestMapping("/exam03")
@@ -25,8 +28,11 @@ public class Exam03Controller {
 	*/
 	
 	@GetMapping("/method1")
-	public String method1(String kind, int pageNo, Model model) {
-		model.addAttribute("kind", kind);
+	public String method1(
+			@RequestParam(name = "kind") String type, 
+			@RequestParam(defaultValue = "1") int pageNo,
+			Model model) {
+		model.addAttribute("kind", type);
 		model.addAttribute("pageNo", pageNo);
 		return "exam03/method1";
 	}
@@ -37,5 +43,10 @@ public class Exam03Controller {
 		model.addAttribute("upassword", upassword);
 		model.addAttribute("upublic", upublic);
 		return "exam03/method2";
+	}
+	
+	@PostMapping("/method3")
+	public String method3(User user) {
+		return "exam03/method3";
 	}
 }
