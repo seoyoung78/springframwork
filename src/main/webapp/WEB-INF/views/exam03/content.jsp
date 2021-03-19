@@ -20,7 +20,7 @@
 	    <input type="password" class="form-control" id="upassword" name="upassword">
 	  </div>
 	  <div class="form-group form-check">
-	    <input type="checkbox" class="form-check-input" id="upublic" name="upublic">
+	    <input type="checkbox" class="form-check-input" id="upublic" name="upublic" value="true">
 	    <label class="form-check-label" for="upublic">공개</label>
 	  </div>
 	  <button type="submit" class="btn btn-primary">로그인</button>

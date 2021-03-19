@@ -38,7 +38,7 @@ public class Exam03Controller {
 	}
 	
 	@PostMapping("/method2")
-	public String method2(String uemail, String upassword, Boolean upublic, Model model) {
+	public String method2(String uemail, String upassword, boolean upublic, Model model) {
 		model.addAttribute("uemail", uemail);
 		model.addAttribute("upassword", upassword);
 		model.addAttribute("upublic", upublic);
