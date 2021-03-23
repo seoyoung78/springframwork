@@ -23,4 +23,8 @@
 		<property name="mapperLocations" value="/WEB-INF/mybatis/mapper/*.xml"/>
 	</bean>
 	
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory"/> <!-- 생성자 주입 -->
+	</bean>
+	
 </beans>
