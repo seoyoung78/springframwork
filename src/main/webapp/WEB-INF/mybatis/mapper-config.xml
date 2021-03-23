@@ -4,5 +4,6 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.mycompany.webapp.dto.Board" alias="board"/>
+		<typeAlias type="com.mycompany.webapp.dto.Pager" alias="pager"/>
 	</typeAliases>
 </configuration>

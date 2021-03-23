@@ -9,6 +9,20 @@
 		order by bno desc
 	</select>
 	
+	<select id="selectByPage" parameterType="pager" resultType="board">
+		select rnum, bno, btitle, bcontent, bwriter, bdate, bhitcount
+    from (
+        select rownum as rnum, bno, btitle, bcontent, bwriter, bdate, bhitcount
+        from (
+            select bno, btitle, bcontent, bwriter, bdate, bhitcount
+            from boards
+            order by bno desc
+        )
+        where rownum &lt;= #{endRowNo}
+    )
+    where rnum &gt;= #{startRowNo}
+	</select>
+	
 	<insert id="insert" parameterType="board">
 		insert into boards
 		(bno, btitle, bcontent, bwriter, bdate, bhitcount)
@@ -22,4 +36,29 @@
 		from boards
 		where bno=#{bno}
 	</select>
+	
+	<update id="update" parameterType="board">
+		update boards set
+			btitle=#{btitle},
+			bcontent=#{bcontent}
+		where bno = #{bno}
+	</update>
+	
+	<delete id="deleteByBno" parameterType="int">
+		delete from boards
+		where bno = #{bno}
+	</delete>
+	
+	<update id="updateBhitcount" parameterType="int">
+		update boards 
+		set
+			bhitcount = bhitcount+1
+		where 
+			bno = #{bno}
+	</update>
+	
+	<select id="count" resultType="int">
+		select count(*) from boards
+	</select>
+	
 </mapper>
