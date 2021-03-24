@@ -40,6 +40,16 @@
     <input type="text" class="form-control" value="${board.bhitcount}" readonly="readonly">
   </div>	
 	
+	<div class="mb-3">
+		<div class="mb-1">첨부</div><br/>
+		<c:if test="${board.battachoname != null}">
+			<a href="downloadAttach?bno=${board.bno}">
+				<img src="downloadAttach?bno=${board.bno}" width="200"/>
+			</a>
+			
+		</c:if>		
+	</div>
+	
 	<div>
 		<a class="btn btn-primary btn-sm" href="list">목록</a>
 		<a class="btn btn-danger btn-sm" href="updateForm?bno=${board.bno}">수정</a>

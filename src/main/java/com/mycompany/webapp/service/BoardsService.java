@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import com.mycompany.webapp.dao.BoardsDao;
 import com.mycompany.webapp.dto.Board;
 import com.mycompany.webapp.dto.Pager;
-
 @Service
 public class BoardsService {
 	@Autowired

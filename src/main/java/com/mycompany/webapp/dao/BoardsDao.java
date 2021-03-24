@@ -2,13 +2,24 @@ package com.mycompany.webapp.dao;
 
 import java.util.List;
 
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Mapper;
 
 import com.mycompany.webapp.dto.Board;
 import com.mycompany.webapp.dto.Pager;
 
+@Mapper // mybatis에서 자동적으로 인터페이스 구현 객체 생성하여 자동으로 관리 객체로 만들어 줌 --> 코드 작성 시간 줄여줌
+public interface BoardsDao {
+	public List<Board> selectAll ();
+	public List<Board> selectByPage(Pager pager);
+	public int insert(Board board);
+	public Board selectByBno(int bno);
+	public int update(Board board);
+	public int deleteByBno(int bno);
+	public int updateBhitcount(int bno);
+	public int count();
+}
+
+/*
 @Repository
 public class BoardsDao {
 	@Autowired
@@ -55,3 +66,4 @@ public class BoardsDao {
 	}
 
 }
+*/
