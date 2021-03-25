@@ -9,13 +9,31 @@
 	});
 	
 	const getList = (pageNo) => {
-		$.ajax({
-			url: "list",
-			data: {pageNo}, // 속성명과 속성값이 동일할 경우 생략 가능
-			method: "get" // 기본적으로는 get 방식
-		}).then(data => {
-			$("#board").html(data); // html 조각을 넣겠다
+		const args = {url:"list", method:"get"}
+		if (pageNo) {
+			args.data = {pageNo};
+		} 
+		$.ajax(args). then(data => {
+			$("#board").html(data)
 		});
+		
+		/* if (pageNo) {
+			$.ajax({
+				url: "list",
+				data: {pageNo}, // 속성명과 속성값이 동일할 경우 생략 가능
+				method: "get" // 기본적으로는 get 방식
+			}).then(data => {
+				$("#board").html(data); // html 조각을 넣겠다
+			});
+		} else {
+			$.ajax({
+				url: "list",
+				data: {pageNo}, // 속성명과 속성값이 동일할 경우 생략 가능
+				method: "get" // 기본적으로는 get 방식
+			}).then(data => {
+				$("#board").html(data); // html 조각을 넣겠다
+			});
+		} */
 	};
 	
 	const read = (bno) => {

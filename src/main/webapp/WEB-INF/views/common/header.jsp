@@ -6,11 +6,11 @@
 <head>
 <title>Spring</title>
 <link rel="stylesheet"
-	href="/webapp/resources/bootstrap-4.6.0/css/bootstrap.min.css">
-<script src="/webapp/resources/js/jquery-3.5.1.min.js"></script>
+	href="<%=application.getContextPath() %>/resources/bootstrap-4.6.0/css/bootstrap.min.css">
+<script src="<%=application.getContextPath() %>/resources/js/jquery-3.5.1.min.js"></script>
 <script
-	src="/webapp/resources/bootstrap-4.6.0/js/bootstrap.bundle.min.js"></script>
-<script src="/webapp/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
+	src="${pageContext.request.contextPath}/resources/bootstrap-4.6.0/js/bootstrap.bundle.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/bootstrap-4.6.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div class="d-flex flex-column vh-100">
@@ -18,13 +18,22 @@
 		<nav
 			class="navbar navbar-expand-sm bg-dark navbar-dark text-white font-weight-bold justify-content-between">
 			<a class="navbar-brand" href="./"> <img
-				src="${pageContext.request.contextPath }/resources/images/logo-spring.png"
+				src="${pageContext.request.contextPath}/resources/images/logo-spring.png"
 				width="30" height="30" class="d-inline-block align-top">
 				Spring
 			</a>
 			<div>
 				<div>
-					<a class="btn btn-success btn-sm" href="#">로그인</a>
+					<c:if	test="${loginUid == null }">
+						<a class="btn btn-success btn-sm" 
+							href="${pageContext.request.contextPath}/exam07/loginForm">로그인</a>
+					</c:if>
+					<c:if	test="${loginUid != null }">
+						<span class="mr-2">User: ${loginUid}</span>
+						<a class="btn btn-success btn-sm" 
+							href="${pageContext.request.contextPath}/exam07/logout">로그아웃</a>
+					</c:if>
+					
 				</div>
 			</div>
 		</nav>

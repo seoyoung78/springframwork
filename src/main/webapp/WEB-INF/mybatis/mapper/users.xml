@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="euc-kr" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="users">
+<mapper namespace="com.mycompany.webapp.dao.UsersDao">
 	
+	<insert id="insert" parameterType="user">
+		insert into users
+		(userid, username, userpassword, userauthority, userenabled)
+		values
+		(#{uid}, #{uname}, #{upassword}, 'ROLE_USER', 1)
+	</insert>
+	
+	<!-- DB와 dto 컬럼의 값이 다른 것을 mapping -->
+	<resultMap id="userResultMap" type="user">
+	  <result property="uid" column="userid" />
+	  <result property="uname" column="username"/>
+	  <result property="upassword" column="userpassword"/>
+	  <result property="uauthority" column="userauthority"/>
+	  <result property="uenabled" column="userenabled"/>
+	</resultMap>
+	
+	<select id="selectByUid" parameterType="string" resultMap="userResultMap"> <!--  소문자 string도 가능 -->
+		select userid, username, userpassword, userauthority, userenabled <!-- as를 사용하여 테이블 명 변경하여 사용 가능 -->
+		from Users
+		where userid=#{uid}
+	</select>
 </mapper>

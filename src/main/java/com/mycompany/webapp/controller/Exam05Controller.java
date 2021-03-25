@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -43,9 +44,22 @@ public class Exam05Controller {
 	}
 	
 	@GetMapping("/list")
-	private String list(@RequestParam(defaultValue = "1") int pageNo, Model model) { // 기본값을 1로 설정
+	private String list(String pageNo, Model model, HttpSession session) { // 기본값을 1로 설정
+		int intPageNo = 1;
+		if(pageNo == null ) {	//클라이언트에서 pagerNo가 넘어오지 않았을 경우
+			// 세션에서 Pager를 찾고, 있으면 pageNo를 설정
+			Pager pager = (Pager)session.getAttribute("pager");
+			if (pager != null) {
+				intPageNo = pager.getPageNo();
+			}
+		} else {	//클라이언트에서 pageNo가 넘어왔을 경우
+			intPageNo = Integer.parseInt(pageNo);
+		}
+				
 		int totalRows = boardsService.getTotalRows();
-		Pager pager = new Pager(6, 5, totalRows, pageNo);
+		Pager pager = new Pager(6, 5, totalRows, intPageNo);
+		session.setAttribute("pager", pager);
+		
 		List<Board> list = boardsService.getBoardList(pager);
 		model.addAttribute("list", list);
 		model.addAttribute("pager", pager);
