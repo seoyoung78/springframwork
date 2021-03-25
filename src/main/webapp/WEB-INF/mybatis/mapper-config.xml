@@ -3,7 +3,7 @@
                         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.mycompany.webapp.dto.Board" alias="board"/>
+		<typeAlias type="com.mycompany.webapp.dto.Board" alias="board"/>	<!-- 별명 설정 -->
 		<typeAlias type="com.mycompany.webapp.dto.Pager" alias="pager"/>
 	</typeAliases>
 </configuration>

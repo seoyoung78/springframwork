@@ -7,13 +7,13 @@
 	<bean id="dataSource" 
 				class="org.apache.commons.dbcp2.BasicDataSource"
 				destroy-method="close">
-		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>		
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver"/>		<!-- Oracle 형식 / 달라질 수 있음 -->
 		<property name="url" value="jdbc:oracle:thin:@106.253.56.122:1521:orcl"/>	
 		<property name="username" value="user22"/>
 		<property name="password" value="12345"/>
-		<property name="initialSize" value="2"/>
-		<property name="maxTotal" value="5"/>
-		<property name="maxIdle" value="2"/>
+		<property name="initialSize" value="2"/> <!-- WAS가 실행되면 초기에 가지고 있을 커넥션풀 개수 -->
+		<property name="maxTotal" value="5"/> <!-- 커넥션풀에 동시에 최대로 접근할 수 있는 접근자 수 -->
+		<property name="maxIdle" value="2"/>	<!-- 사용가능하고 풀에 저장될 수 있는 최대 커넥션 개수 -->
 	</bean>
 	
 	<!-- MyBatis -->
