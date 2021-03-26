@@ -1,5 +1,7 @@
 package com.mycompany.webapp.controller;
 
+import java.io.File;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -7,10 +9,13 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mycompany.webapp.dto.Board;
 import com.mycompany.webapp.dto.Pager;
@@ -75,5 +80,41 @@ public class Exam08Controller {
 		model.addAttribute("list", list);
 		model.addAttribute("pager", pager);
 		return "exam08/boardlist";
+	}
+	
+	@GetMapping("/user/createForm")
+	public String createForm() {
+		return "exam08/createFormWithAttach";
+	}
+	
+	@PostMapping("/user/createWithAttach")
+	public String createWithAttach(Board board, /*Principal principal*/ Authentication auth) {
+		/*logger.info(principal.getName());*/
+		/*logger.info(auth.getName());*/
+		MultipartFile battach = board.getBattach();
+		if(!battach.isEmpty()) {
+			board.setBattachoname(battach.getOriginalFilename());
+			board.setBattachtype(battach.getContentType());
+			String saveName = new Date().getTime() + "-" + board.getBattachoname();
+			board.setBattachsname(saveName);
+			
+			File file = new File("D:/서영/Class/uploadfiles/" + board.getBattachsname());
+			try {
+				battach.transferTo(file);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+		}		
+		
+		board.setBwriter(auth.getName());
+		
+		boardsService.saveBoard(board);
+		
+		return "redirect:/exam08/user/boardlist";
+	}
+	
+	@GetMapping("/error403")
+	public String error403() {
+		return "exam08/error403";
 	}
 }

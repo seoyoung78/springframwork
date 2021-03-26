@@ -8,7 +8,7 @@
 	<!-- 보안을 체크할 필요가 없는 경로 설정 -->
 	<security:http pattern="/resources/**" security="none"/>
 	
-	<!-- 보안 필터 체인(프로세싱) -->
+	<!-- 보안 필터 체인(프로세싱) 설정 -->
 	<security:http>
 		<!-- 요청 경로 체크 -->
 		<security:intercept-url pattern="/exam08/admin/**" access="hasRole('ROLE_ADMIN')"/>
@@ -19,10 +19,28 @@
 		<security:form-login login-page="/exam08/loginForm"
 												 username-parameter="uid"
 												 password-parameter="upassword"
-												 login-processing-url="/login"/>
+												 login-processing-url="/login"
+												 authentication-failure-url="/exam08/loginForm"
+												 authentication-success-handler-ref="authSuccessHandler"
+												 authentication-failure-handler-ref="authFailureHandler"/>
 		<!-- <security:csrf disabled="true"/> -->
 		
+		<!-- POST 방식으로 요청해야 함 -->
 		<security:logout logout-url="/logout"/>
+		
+		<!-- 로그인 중복 처리 설정 -->
+		<security:session-management>
+			<!-- 기존 브라우저는 강제 아웃, 다른 브라우저는 로그인 -->
+			<security:concurrency-control max-sessions="1"
+																		error-if-maximum-exceeded="false"
+																		expired-url="/exam08/loginForm"/>
+			<!-- 기존 브라우저는 로그인 유지, 다른 브라우저는 에러 메시지 출력 -->
+			<!-- <security:concurrency-control max-sessions="1"
+																		error-if-maximum-exceeded="true"/> -->
+		</security:session-management>
+		
+		<!--  403에러가 발생할 대 이동할 페이지  -->
+		<security:access-denied-handler error-page="/exam08/error403"/>
 	</security:http>
 	
 	<!-- 사용자 인증 처리를 위한 설정 (DB 테이블 관련) -->
@@ -57,6 +75,14 @@
 				</property>
 			</bean>
 		</constructor-arg>
+	</bean>
+	
+	<!-- 로그인 성공했을 때와 실패했을 때 콜백되는 객체 설정 -->
+	<bean id="authSuccessHandler"
+				class="com.mycompany.webapp.security.AuthSuccessHandler"></bean>
+	<bean id="authFailureHandler"
+				class="com.mycompany.webapp.security.AuthFailureHandler">
+		<property name="defaultFailureUrl" value="/exam08/loginForm"></property>			
 	</bean>
 	
 </beans>

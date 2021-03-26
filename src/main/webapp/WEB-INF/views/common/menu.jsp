@@ -45,4 +45,9 @@
  		<a class="nav-link text-warning" href="${pageContext.request.contextPath}/exam08/admin/boardlist">
  			관리자가 사용하는 페이지</a>
   </li>
+  <li class="nav-item nmb-2">
+    <h6 class="text-white">유효성 검사</h6>
+    <a class="nav-link text-warning" href="${pageContext.request.contextPath}/exam09/joinForm">
+   		폼 유효성 검사</a>
+  </li>
 </ul>
