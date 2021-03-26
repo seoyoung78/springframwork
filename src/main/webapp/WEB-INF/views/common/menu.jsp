@@ -38,4 +38,11 @@
  		<a class="nav-link text-warning" href="${pageContext.request.contextPath}/exam07/loginForm">
  			로그인</a>
   </li>
+  <li class="nav-item nmb-2">
+    <h6 class="text-white">스프링 시큐리티</h6>
+    <a class="nav-link text-warning" href="${pageContext.request.contextPath}/exam08/user/boardlist">
+   		사용자가 사용하는 페이지</a>
+ 		<a class="nav-link text-warning" href="${pageContext.request.contextPath}/exam08/admin/boardlist">
+ 			관리자가 사용하는 페이지</a>
+  </li>
 </ul>

@@ -114,16 +114,16 @@ public class Exam04Controller {
 	}*/
 
 	@PostMapping("/create")
-	public String create(Board board/*, HttpSession session*/) {
+	public String create(Board board, HttpSession session) {
 		/*Board board = new Board();
 		board.setBtitle(btitle);
 		board.setBcontent(bcontent);*/
-		/*String uid = (String) session.getAttribute("loginUid");
+		String uid = (String) session.getAttribute("loginUid");
 		if (uid == null) {
 			return "redirect:/exam07/loginForm"; 
 		} else {
 			board.setBwriter("uid");
-		}*/
+		}
 		
 		boardsService.saveBoard(board);
 		return "redirect:/exam04/list";
